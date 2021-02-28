@@ -7,7 +7,7 @@ color backgroundColor = color(255);
 // -----
 float point = 0;
 float targetPoint = 10;
-
+float floorLine = 350;//50
 
 void setup(){
   size(400, 400);
@@ -37,7 +37,7 @@ void draw(){
     Targets.get(i).display();
   }
   
-  // collision  
+  // collision target  
   for(int i=0; i<Balls.size(); i++){
     Ball b = Balls.get(i);
     for(int j=0; j<Targets.size(); j++){
@@ -52,6 +52,19 @@ void draw(){
       }
     }
   }
+  
+  line(0, floorLine, width, floorLine);
+  
+  // collision floor  
+  for(int i=0; i<Balls.size(); i++){
+    Ball b = Balls.get(i);
+    
+    if(b.y + b.r >= floorLine){
+      Balls.remove(i);
+    }
+  }
+  
+  
   stroke(0);
   fill(0);
   text("point:" + str(point), 300, 50);
