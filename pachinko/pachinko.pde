@@ -9,6 +9,8 @@ float point = 0;
 float targetPoint = 10;
 float floorLine = 350;//50
 
+int mode = 1;//mouse
+
 void setup(){
   size(400, 400);
   Ball b = new Ball(200, 200, 10);
@@ -28,6 +30,30 @@ void setup(){
 }
 void draw(){
   background(backgroundColor);
+  
+  float cx = width/2.0;
+  float cy = 260;
+  
+  float cursorX = 0;
+  float cursorY = 0;
+  
+  switch(mode){
+    case 1:
+      cursorX = mouseX;
+      cursorY = mouseY;
+      break;
+  }
+  
+  stroke(0);
+  fill(0);
+  line(cx, cy + 50, cx, cy + 50+50);
+  line(cx-50, cy, cx, cy + 50);
+  line(cx+50, cy, cx, cy + 50);
+  
+  line(cx-50, cy, cursorX, cursorY);
+  line(cx+50, cy, cursorX, cursorY);
+  
+  
   for(int i=0; i<Balls.size(); i++){
     Balls.get(i).update();
     Balls.get(i).display();
